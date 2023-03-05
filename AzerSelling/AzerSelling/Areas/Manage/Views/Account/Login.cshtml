@@ -1,0 +1,39 @@
+﻿@model AdminLoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/manage/login/css/index.css">
+    <title>Login-Admin Panel</title>
+
+    <link rel="shortcut icon" href="~/manage/assets/images/download.jpg" />
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form method="post" action="">
+                    <h2>Login</h2>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input asp-for="Username" required>
+                        <label asp-for="Username">Username</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input asp-for="Password" required>
+                        <label asp-for="Password">Password</label>
+                    </div>
+                    <button type="submit">Log in</button>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" style="padding: 5px;width: 290px;text-align-last: center;margin: 10px;background-color: beige;border-radius: 15px;"></div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

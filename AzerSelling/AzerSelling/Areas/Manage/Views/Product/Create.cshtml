@@ -1,0 +1,122 @@
+﻿@model Product
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">Create Product</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Product</li>
+                <li class="breadcrumb-item">Table</li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form class="forms-sample" method="post" enctype="multipart/form-data">
+                        <div class="form-group row">
+                            <label asp-for="CategoryId" class="col-sm-3 col-form-label">Category</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" asp-for="CategoryId">
+                                    @foreach (Category category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="CompanyId" class="col-sm-3 col-form-label">Company</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" asp-for="CompanyId">
+                                    @foreach (Company company in ViewBag.Companies)
+                                    {
+                                        <option value="@company.Id">@company.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CompanyId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Name" class="form-control" placeholder="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-4">
+                                <label asp-for="CostPrice" class=" col-form-label">Cost Price</label>
+                                <div>
+                                    <input asp-for="CostPrice" class="form-control" placeholder="Cost Price">
+                                    <span asp-validation-for="CostPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label asp-for="SalePrice" class=" col-form-label">Sale Price</label>
+                                <div>
+                                    <input asp-for="SalePrice" class="form-control" placeholder="Sale Price">
+                                    <span asp-validation-for="SalePrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label asp-for="DiscountPercent" class=" col-form-label">Discount Percent</label>
+                                <div>
+                                    <input asp-for="DiscountPercent" class="form-control" placeholder="Discount Percent">
+                                    <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 style="text-align-last:center">--- Available ---</h3>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input asp-for="IsAvailable" type="checkbox" class="form-check-input" checked=""> Is Available <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 style="text-align-last:center">--- Title ---</h3>
+                        <div class="form-group">
+                            <textarea asp-for="Title" class="form-control" id="exampleTextarea1" rows="5"></textarea>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <h3 style="text-align-last:center">--- Description ---</h3>
+                        <div class="form-group">
+                            <textarea asp-for="Description" class="form-control" id="exampleTextarea1" rows="10"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <h3 style="text-align-last:center">--- Images ---</h3>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label asp-for="PosterImageFile" class="col-form-label">Poster Image</label>
+                                <div>
+                                    <input asp-for="PosterImageFile" class="form-control">
+                                    <span asp-validation-for="PosterImageFile" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="ImageFiles" class=" col-form-label">Gallery</label>
+                                <div>
+                                    <input asp-for="ImageFiles" class="form-control">
+                                    <span asp-validation-for="ImageFiles" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-inverse-success mr-2">Create</button>
+                        <button asp-action="index" asp-controller="product" class="btn btn-dark">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

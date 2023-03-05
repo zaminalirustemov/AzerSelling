@@ -1,0 +1,172 @@
+﻿@model MemberLoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sign In - AzerSelling</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="~/assets/register/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <link rel="stylesheet" href="~/assets/register/css/style.css">
+    <link rel="shortcut icon" href="~/assets/images/memperphoto.jpg" />
+    <style>
+        .button-register {
+            width: 9em;
+            height: 3em;
+            border-radius: 30em;
+            font-size: 15px;
+            font-family: inherit;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            background-color: #c3b5d8;
+        }
+
+            .button-register::before {
+                content: '';
+                width: 0;
+                height: 3em;
+                border-radius: 30em;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-image: linear-gradient(to right, #5999e0 0%, #e147f9 100%);
+                transition: .5s ease;
+                display: block;
+                z-index: -1;
+            }
+
+            .button-register:hover::before {
+                width: 9em;
+            }
+
+
+        .button-login {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #86d3cc;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+            .button-login:hover {
+                background-color: #23c483;
+                box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+                color: #fff;
+                transform: translateY(-7px);
+            }
+
+            .button-login:active {
+                transform: translateY(-1px);
+            }
+
+        .button-back {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #e1bb66;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+            .button-back:hover {
+                background-color: #8b8b8b;
+                box-shadow: 0px 15px 20px rgba(140, 127, 134, 0.76);
+                color: #fff;
+                transform: translateY(-7px);
+            }
+
+            .button-back:active {
+                transform: translateY(-1px);
+            }
+    </style>
+    <meta name="robots" content="noindex, follow">
+    <script nonce="d481b8ad-20a3-493a-a678-379909436891">(function (w, d) { !function (f, g, h, i) { f[h] = f[h] || {}; f[h].executed = []; f.zaraz = { deferred: [], listeners: [] }; f.zaraz.q = []; f.zaraz._f = function (j) { return function () { var k = Array.prototype.slice.call(arguments); f.zaraz.q.push({ m: j, a: k }) } }; for (const l of ["track", "set", "debug"]) f.zaraz[l] = f.zaraz._f(l); f.zaraz.init = () => { var m = g.getElementsByTagName(i)[0], n = g.createElement(i), o = g.getElementsByTagName("title")[0]; o && (f[h].t = g.getElementsByTagName("title")[0].text); f[h].x = Math.random(); f[h].w = f.screen.width; f[h].h = f.screen.height; f[h].j = f.innerHeight; f[h].e = f.innerWidth; f[h].l = f.location.href; f[h].r = g.referrer; f[h].k = f.screen.colorDepth; f[h].n = g.characterSet; f[h].o = (new Date).getTimezoneOffset(); if (f.dataLayer) for (const s of Object.entries(Object.entries(dataLayer).reduce(((t, u) => ({ ...t[1], ...u[1] }))))) zaraz.set(s[0], s[1], { scope: "page" }); f[h].q = []; for (; f.zaraz.q.length;) { const v = f.zaraz.q.shift(); f[h].q.push(v) } n.defer = !0; for (const w of [localStorage, sessionStorage]) Object.keys(w || {}).filter((y => y.startsWith("_zaraz_"))).forEach((x => { try { f[h]["z_" + x.slice(7)] = JSON.parse(w.getItem(x)) } catch { f[h]["z_" + x.slice(7)] = w.getItem(x) } })); n.referrerPolicy = "origin"; n.src = "../../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(f[h]))); m.parentNode.insertBefore(n, m) };["complete", "interactive"].includes(g.readyState) ? zaraz.init() : f.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+</head>
+<body>
+    <div class="main" style="padding-top: 70px;padding-bottom: 15px;">
+
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="https://s3-us-west-2.amazonaws.com/hestabit-development/images/rpo/rpo-we-consult.png" alt="sing up image"></figure>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Log in</h2>
+                        <form method="POST" class="register-form" id="login-form">
+
+                            <div asp-validation-summary="ModelOnly" style="color:red"> </div>
+                            <div class="form-group">
+                                <label asp-for="UserName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="UserName" placeholder="Your Username" />
+                                <span asp-validation-for="UserName" style="color:red"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
+                                <input asp-for="Password" placeholder="Password" />
+                                <span asp-validation-for="Password" style="color:red"></span>
+                            </div>
+                            <div style="display:flex">
+                                <div class="form-group form-button">
+                                    <button type="submit" class="button-login form-submit">Login</button>
+                                </div>
+                                <div style="padding-top: 25px;padding-left: 10px;margin-top: 11px;">
+                                    <a class="button-back" asp-action="index" asp-controller="home" style="text-decoration: none;color:black">
+                                        Back
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group form-button">
+                                <div style="max-width:100%;display: flex;justify-content: center;">
+                                    <a class="button-register" asp-action="register" asp-controller="account" style="text-decoration: none;color:black;display: flex;align-items: center;justify-content: center;">
+                                        Register
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/assets/register/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/register/js/main.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"796bd233ddf49dc2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
+</body>
+
+</html>

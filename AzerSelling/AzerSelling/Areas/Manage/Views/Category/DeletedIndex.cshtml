@@ -1,0 +1,94 @@
+﻿@model PaginatedList<Category>
+@{
+    int count = (Model.ActivePage - 1) * 7;
+}
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Deleted Category Table </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Recycle Bin</li>
+                    <li class="breadcrumb-item">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Table</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                    @if (Model.Count == 0)
+                    {
+                        <div class="table-responsive" style="min-height:450px;text-align: center;">
+                            <div style="position: sticky;top: 23%;">
+                                <div>
+                                    <i class="mdi mdi-flask-outline" style="font-size: 7rem;color: #c282ff;"></i>
+                                </div>
+                                <div>
+                                    <span style="font-family: auto;font-size: 20px;">This table is empty, no data available</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <a asp-action="AllDelete" asp-controller="Category" class="btn btn-danger all-delete-button">All Delete</a>
+                                <thead>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Category category in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@category.Id</td>
+                                            <td>@category.Name</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuOutlineButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton2" style="">
+                                                        <a class="dropdown-item btn btn-primary" asp-action="restore" asp-controller="category" asp-route-id="@category.Id">Restore</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item btn btn-danger harddelete-btn" asp-action="harddelete" asp-controller="category" asp-route-id="@category.Id">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (Model.PreviousPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="deletedindex" asp-route-page="@(Model.ActivePage-1)">&laquo;</a>
+                </li>
+            }
+            @for (int i = 1; i <= Model.TotalPageCount; i++)
+            {
+                <li class="page-item @(Model.ActivePage==i? "active" :"")"><a class="page-link" asp-action="deletedindex" asp-route-page="@i">@i</a></li>
+            }
+            @if (Model.NextPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="deletedindex" asp-route-page="@(Model.ActivePage+1)">&raquo;</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

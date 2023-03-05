@@ -1,0 +1,47 @@
+﻿<div class="row">
+	<div class="col-lg-9">
+		<div class="row">
+			@foreach (Product product in Model)
+			{
+
+				<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+					<div class="single-related-product d-flex">
+						<a style="width:70px" asp-action="detail" asp-controller="shop" asp-route-id="@product.Id"><img style="max-width:100%" src="~/uploads/product/@product.ProductImages.FirstOrDefault(x=>x.isPoster==true).ImageName" alt=""></a>
+						<div class="desc">
+							<a asp-action="detail" asp-controller="shop" asp-route-id="@product.Id" class="title">@product.Name</a>
+							<div class="price">
+								 @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @if (product.DiscountPercent > 0)
+                                        {
+                                            <h6>
+                                                @((product.SalePrice - (product.SalePrice * product.DiscountPercent) / 100).ToString("0.00"))$
+                                            </h6>
+                                            <h6 class="l-through">@(product.SalePrice.ToString("0.00")) $</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>@(product.SalePrice.ToString("0.00")) $</h6>
+
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        <h6>@(product.SalePrice.ToString("0.00")) $</h6>
+                                    }
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="ctg-right">
+			<a href="#" target="_blank">
+				<img class="img-fluid d-block mx-auto" src="~/assets/img/category/c5.jpg" alt="">
+			</a>
+		</div>
+	</div>
+</div>

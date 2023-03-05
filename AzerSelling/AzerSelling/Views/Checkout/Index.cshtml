@@ -1,0 +1,87 @@
+﻿@model OrderViewModel
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Checkout</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="single-product.html">Checkout</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--Checkout Area-->
+<section class="checkout_area section_gap">
+    <div class="container">
+
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details</h3>
+                    <form class="row contact_form" asp-action="index" asp-controller="checkout" method="post" id="orderForm">
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Fullname" class="form-control" placeholder="Fullname">
+                            <span asp-validation-for="Fullname" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="Phonenumber" class="form-control" placeholder="Phonenumber">
+                            <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="Email" class="form-control" placeholder="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Country" class="form-control" placeholder="Country">
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="Address" class="form-control" placeholder="Address">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input asp-for="City" class="form-control" placeholder="City">
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <textarea asp-for="Note" class="form-control"  rows="1" placeholder="Order Notes"></textarea>
+                        </div>
+                        <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+                        <img style="width: 285px;" src="~/uploads/product/@Model.Product.ProductImages.FirstOrDefault(x=>x.isPoster==true).ImageName" />
+                        <ul class="list">
+                            <li><a>Category : <span class="last">@Model.Product.Category.Name</span></a></li>
+                            <li><a>Company  : <span class="last">@Model.Product.Company.Name</span></a></li>
+                            <li><a>Name     : <span class="last">@Model.Product.Name</span></a></li>
+                        </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <ul class="list list_2">
+                            <li><a>Sale Price <span>$ @Model.Product.SalePrice.ToString("0.00")</span></a></li>
+                            <li><a>Discount <span>% @Model.Product.DiscountPercent</span></a></li>
+                            <li><a>Discounted Price <span>$ @((Model.Product.SalePrice - (Model.Product.SalePrice * Model.Product.DiscountPercent) / 100).ToString("0.00"))$</span></a></li>
+                        </ul>
+                        }else
+                        {
+                            <ul class="list list_2">
+                                <li><a>Sale Price <span>$ @Model.Product.SalePrice.ToString("0.00")</span></a></li>
+                            </ul>
+                        }
+                        
+                        
+                        <button class="primary-btn" type="submit" form="orderForm">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Checkout Area-->
